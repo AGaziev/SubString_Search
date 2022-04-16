@@ -1,6 +1,6 @@
 def main():
-    text = 'ABCBCBABBBABAAACBABCBA'
-    s = 'CBCB'
+    text = input('Введите текст:\t')
+    s = input('Введите образец:\t')
     print(BMSearch(s, text))
 
 

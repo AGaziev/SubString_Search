@@ -1,6 +1,6 @@
 def main():
-    text = 'ABACBCBABCBABCABBAAABC'
-    s = 'CBA'
+    text = input('Введите текст:\t')
+    s = input('Введите образец:\t')
     print(RabinKarpSearch(s, text))
 
 
