@@ -7,23 +7,23 @@ def main():
 def BMSearch(s, text):
     shift = getShiftingTable(s)  # таблица сдвигов
     print(shift)
-    k = len(s) - 1  # итераторы на конец образца
-    l = len(s) - 1
-    lastk = k
-    while k < len(text):
-        if l < 0:  # дошли до начала образца
-            return k + 2  # добавляем 1 так как перед выводом вычли 1 из k
-        if text[k] == s[l]:
-            k -= 1
-            l -= 1
-        elif k != lastk:  # если были совпадения
-            k = lastk + shift.get(s[-1])
-            lastk = k
-            l = len(s) - 1
-        else:
-            k = lastk + shift.get(text[k], len(s))  # получаем сдвиг или сдвигаем на длину строки
-            lastk = k
-            l = len(s) - 1
+    text = len(s) - 1  # итератор в тексте
+    ex = len(s) - 1  # итератор в образце
+    lastText = text  # последняя позиция итератора в тексте до сравнения
+    while text < len(text):
+        if text[text] == s[ex]:  # если есть совпадения
+            text -= 1
+            ex -= 1
+        elif text != lastText:  # если были совпадения
+            text = lastText + shift.get(s[-1])
+            lastText = text
+            ex = len(s) - 1
+        else:  # если совпадений не было
+            text = lastText + shift.get(text[text], len(s))  # получаем сдвиг или сдвигаем на длину строки
+            lastText = text
+            ex = len(s) - 1
+        if ex < 0:  # дошли до начала образца
+            return text + 1  # добавляем 1 так как перед выводом вычли 1 из text
     return 'Не найдено'
 
 

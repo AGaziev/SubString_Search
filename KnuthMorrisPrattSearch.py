@@ -2,23 +2,24 @@ def main():
     text = input('Введите текст:\t')
     s = input('Введите образец:\t')
     prefixFunc = getPrefixFunction(s)
+    print(prefixFunc)
     print(KMPSearch(prefixFunc, s, text))
 
 
 def KMPSearch(prefixFunc, s, text):
-    k, l = 0
-    while k < len(text):
-        if text[k] == s[l]:
-            k += 1
-            l += 1
-            if l == len(s):
-                return k - l
-        elif l == 0:
-            k += 1
-            if k == len(text):
+    textIter, exIter = 0, 0
+    while textIter < len(text):
+        if text[textIter] == s[exIter]:
+            textIter += 1
+            exIter += 1
+            if exIter == len(s): # дошли до конца образца
+                return textIter - exIter
+        elif exIter == 0: # если не совпадает и не проходили по образу, то просто идем дальше
+            textIter += 1
+            if textIter == len(text):
                 return 'Не найдено'
-        else:
-            l = prefixFunc[l - 1]
+        else: # если прошли по образу, но не до конца, то сдвигаем по префикс функции итератор
+            exIter = prefixFunc[exIter - 1]
     return 'Не найдено'
 
 
