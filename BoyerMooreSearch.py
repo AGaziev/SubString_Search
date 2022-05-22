@@ -4,26 +4,26 @@ def main():
     print(BMSearch(s, text))
 
 
-def BMSearch(s, text):
+def BMSearch(s, TEXT):
     shift = getShiftingTable(s)  # таблица сдвигов
     print(shift)
-    text = len(s) - 1  # итератор в тексте
+    textIt = len(s) - 1  # итератор в тексте
     ex = len(s) - 1  # итератор в образце
-    lastText = text  # последняя позиция итератора в тексте до сравнения
-    while text < len(text):
-        if text[text] == s[ex]:  # если есть совпадения
-            text -= 1
+    lastText = textIt  # последняя позиция итератора в тексте до сравнения
+    while textIt < len(TEXT):
+        if TEXT[textIt] == s[ex]:  # если есть совпадения
+            textIt -= 1
             ex -= 1
-        elif text != lastText:  # если были совпадения
-            text = lastText + shift.get(s[-1])
-            lastText = text
+        elif textIt != lastText:  # если были совпадения
+            textIt = lastText + shift.get(s[-1])
+            lastText = textIt
             ex = len(s) - 1
         else:  # если совпадений не было
-            text = lastText + shift.get(text[text], len(s))  # получаем сдвиг или сдвигаем на длину строки
-            lastText = text
+            textIt = lastText + shift.get(TEXT[textIt], len(s))  # получаем сдвиг или сдвигаем на длину строки
+            lastText = textIt
             ex = len(s) - 1
         if ex < 0:  # дошли до начала образца
-            return text + 1  # добавляем 1 так как перед выводом вычли 1 из text
+            return textIt + 1  # добавляем 1 так как перед выводом вычли 1 из textIt
     return 'Не найдено'
 
 
